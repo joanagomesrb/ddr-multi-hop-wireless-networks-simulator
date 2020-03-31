@@ -1,7 +1,7 @@
 % simulator values
 N = 60;    
 S = 3;      
-W = 60;     
+W = 40;     
 dlt = 1;   
 T = 7200;  
 AP = [250 100];   
@@ -20,13 +20,18 @@ for i = 1:times
     results_min(i) = MinAvail;
 end
 
-m = mean(results_mean);
+disp(results_min)
+m = sum(results_mean)/times;
+minimum = min(results_min);
 % 90% confidence interval
 alfa = 0.1;
-term = norminv(1-alfa/2)*sqrt(var(results_mean)/times);
-fprintf('resultado = %.2e +- %.2e\n', m, term)
+term_mean = norminv(1-alfa/2)*sqrt(var(results_mean)/times);
+r_mean = ["result mean: ", m, " w/ confidence: ", term_mean]
+term_min = norminv(1-alfa/2)*sqrt(var(results_min)/times);
+r_min = ["result min: ", minimum, " w/ confidence: ", term_min]
+%fprintf('resultado mean = %.2e +- %.2e\n', m, term)
 
-minimum = min(results_min);
-term = norminv(1-alfa/2)*sqrt(var(results_min)/times);
-fprintf('resultado = %.2e +- %.2e\n', minimum, term)
+
+%term = norminv(1-alfa/2)*sqrt(var(results_min)/times);
+%fprintf('resultado min = %.2e +- %.2e\n', minimum, term)
 
