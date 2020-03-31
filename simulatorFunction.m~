@@ -115,24 +115,26 @@ function C= ConnectedNodes(L,N,AP)
     connected_x = L(: , 1);
     connected_y = L(: , 2);
     
-    all_nodes = N + size(AP, 1);
+    all_nodes = N + size(AP, 1)
+    
     first_ap = N+1;
     last_ap = N+size(AP,1);
-    n_mobileNodes = 1:N;
     
     
     connected_graph = graph(connected_x, connected_y, [], all_nodes);
     
-    d = distances(connected_graph, first_ap : last_ap, n_mobileNodes);
+    d = distances(connected_graph, first_ap : N+size(AP,1), 1:N);
 
-    for n = 1:size(d,1)
-        for j = 1:N
-            if d(n,j) < Inf
-                C(n,j) = true;
-            end
-        end
+    
+    if size(d,1)==1
+        C = d<Inf;
+       % disp(d)
+        %disp(C)
+    else
+        C = min(d)<Inf;
     end
-           
+         
+    
 %     
 %     for i = 1 : size(connected_x)
 %         if( L(i, 1) > N)
