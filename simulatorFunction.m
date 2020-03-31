@@ -118,6 +118,13 @@ function C= ConnectedNodes(L,N,AP)
     connected_graph = graph(connected_x, connected_y, [], N + size(AP, 1));
     
     d = distances(connected_graph, N+1 : N+size(AP,1), 1:N);
+
+    if size(d,1)==1
+        C = d<Inf;
+    else
+        C = min(d)<Inf;
+    end
+     
 %     
 %     for i = 1 : size(connected_x)
 %         if( L(i, 1) > N)
@@ -130,12 +137,7 @@ function C= ConnectedNodes(L,N,AP)
 %     
 %     d = distances(L, ap_list);
 %     
-   if size(d,1)==1
-      C = d<Inf;
-   else
-      C = min(d)<Inf;
-   end
-     
+
 end
 
 function [AverageAvailability, MinimumAvailability]= results(T,counter)
@@ -143,13 +145,13 @@ function [AverageAvailability, MinimumAvailability]= results(T,counter)
 % between 0 and 1) based on array 'counter' and on the total number of
 % time slots T.
     tmp = ["counter: ", counter];
-	disp(tmp);
-    %m = mean(counter, 'all');
-    m = (counter/size(counter, 1))/T;
+	%disp(tmp);
+    m = mean(counter)/T;
+    %m = (counter/size(counter, 1))/T;
     AverageAvailability = m;
     MinimumAvailability = min(counter)/T;
-    res = ["Mean: ", AverageAvailability, " Min: ", MinimumAvailability];
-    disp(res);
+    res = ["Mean: ", AverageAvailability*100, " Min: ", MinimumAvailability*100];
+    %disp(res);
 end
 
 function visualize(N,AP,pos,L,C,plotar)
