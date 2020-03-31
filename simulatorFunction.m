@@ -128,24 +128,11 @@ function C= ConnectedNodes(L,N,AP)
     for n = 1:size(d,1)
         for j = 1:N
             if d(n,j) < Inf
-                C(n,j) = true;
+                C(1,j) = true;
             end
         end
     end
            
-%     
-%     for i = 1 : size(connected_x)
-%         if( L(i, 1) > N)
-%             connected_list = [ap_list L(i, 1)];
-%         end
-%         if( L(i, 2) > N)
-%             connected_list = [ap_list L(i, 2)];
-%         end
-%     end
-%     
-%     d = distances(L, ap_list);
-%     
-
 end
 
 function [AverageAvailability, MinimumAvailability]= results(T,counter)
