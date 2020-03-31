@@ -9,15 +9,24 @@ pl = 0;
 
 % mean and minimum values 
 m = 0;
-min = 0;
+minimum = 0;
 times = 10;
+results_mean = zeros(1, times);
+results_min = zeros(1, times);
 
 for i = 1:times
     [AvgAvail, MinAvail]= simulatorFunction(N,S,W,dlt,T,AP,pl);
-    m = m + AvgAvail;
-    min = min + MinAvail;
+    results_mean(i) = AvgAvail;
+    results_min(i) = MinAvail;
 end
 
-mean = (m/times)*100
-minimum = (min/times)*100
+m = mean(results);
+minimum = min(results_min);
+
+% 90% confidence interval
+alfa = 0.1;
+term = norminv(1-alfa/2)*sqrt(var(results)/times);
+
+fprintf('resultado = %.2e +- %.2e\n', m, term)
+fprintf('resultado = %.2e +- %.2e\n', minimum, term)
 
