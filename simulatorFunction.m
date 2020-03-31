@@ -141,10 +141,10 @@ function [AverageAvailability, MinimumAvailability]= results(T,counter)
 % time slots T.
     tmp = ["counter: ", counter];
 	%disp(tmp);
-    m = mean(counter)/T;
+    m = (mean(counter)/T)*100;
     %m = (counter/size(counter, 1))/T;
     AverageAvailability = m;
-    MinimumAvailability = min(counter)/T;
+    MinimumAvailability = (min(counter)/T)*100;
     res = ["Mean: ", AverageAvailability*100, " Min: ", MinimumAvailability*100];
     %disp(res);
 end
