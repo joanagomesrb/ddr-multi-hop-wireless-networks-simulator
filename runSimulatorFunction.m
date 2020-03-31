@@ -20,13 +20,13 @@ for i = 1:times
     results_min(i) = MinAvail;
 end
 
-m = mean(results);
-minimum = min(results_min);
-
+m = mean(results_mean);
 % 90% confidence interval
 alfa = 0.1;
-term = norminv(1-alfa/2)*sqrt(var(results)/times);
-
+term = norminv(1-alfa/2)*sqrt(var(results_mean)/times);
 fprintf('resultado = %.2e +- %.2e\n', m, term)
+
+minimum = min(results_min);
+term = norminv(1-alfa/2)*sqrt(var(results_min)/times);
 fprintf('resultado = %.2e +- %.2e\n', minimum, term)
 
